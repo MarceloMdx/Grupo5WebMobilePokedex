@@ -8,8 +8,9 @@
     "ios": "expo start --ios",
     "web": "expo start --web"
   },
-    "dependencies": {
+  "dependencies": {
     "@react-navigation/stack": "^7.10.3",
+    "axios": "^1.18.0",
     "expo": "~54.0.34",
     "expo-status-bar": "~3.0.9",
     "react": "19.1.0",
