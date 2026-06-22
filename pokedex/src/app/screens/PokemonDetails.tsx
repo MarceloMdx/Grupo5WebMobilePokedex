@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { View, Text, StyleSheet, ActivityIndicator, Image, TouchableOpacity } from 'react-native'
 import { PokemonTypeTranslation } from "../constants/pokemonTypes";
-import { formatStats } from "../util/formatStats.ts";
+import { formatStats } from "../util/formatStats";
 interface pokemonInfo {
   id: number;
   name: string;
@@ -221,7 +221,7 @@ statsContainer: {
   width: "100%",
 },
 
-statsTitle: {
+statsTitlew: {
   fontSize: 18,
   fontWeight: "bold",
   marginBottom: 15,
