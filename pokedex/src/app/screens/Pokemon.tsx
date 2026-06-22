@@ -1,25 +1,26 @@
+import { Feather } from "@expo/vector-icons";
+import React, { useEffect, useState } from "react";
 import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  ListRenderItem,
   ActivityIndicator,
+  FlatList,
   Image,
+  ListRenderItem,
+  StyleSheet,
+  Text,
   TouchableOpacity,
-} from 'react-native'
-import { Feather } from '@expo/vector-icons';
-import React, { useEffect, useState } from 'react'
+  View,
+} from "react-native";
 
-const IMAGE = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon"
+const IMAGE =
+  "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon";
 
 type PokemonProps = {
   name: string;
   url: string;
-}
+};
 
 function getPokemonImage(url: string) {
-  const pokemonId = url.split('/').filter(Boolean).pop();
+  const pokemonId = url.split("/").filter(Boolean).pop();
   return `${IMAGE}/${pokemonId}.png`;
 }
 
@@ -28,7 +29,6 @@ function capitalize(name: string) {
 }
 
 export default function Pokemon({ navigation }: any) {
-
   const [offset, setOffset] = useState(0);
   const [pokemons, setPokemons] = useState<any>([]);
   const [loading, setLoading] = useState(false);
@@ -50,37 +50,35 @@ export default function Pokemon({ navigation }: any) {
           <Text style={styles.detailButtonText}>Ver detalhes →</Text>
         </View>
       </TouchableOpacity>
-    )
-  }
+    );
+  };
 
   async function listarPokemons() {
-    setLoading(true)
-    setError(undefined)
+    setLoading(true);
+    setError(undefined);
     try {
       const response = await fetch(
-        `https://pokeapi.co/api/v2/pokemon?limit=20&offset=${offset}`
+        `https://pokeapi.co/api/v2/pokemon?limit=20&offset=${offset}`,
       );
-      const data = await response.json()
-      setPokemons(data.results)
+      const data = await response.json();
+      setPokemons(data.results);
 
       if (!response.ok) {
-        throw new Error("Não foi possível carregar os pokémons")
+        throw new Error("Não foi possível carregar os pokémons");
       }
-
     } catch (error: any) {
-      console.error('Ocorreu um erro:', error.message);
-      setError(error.message)
-
+      console.error("Ocorreu um erro:", error.message);
+      setError(error.message);
     } finally {
       setTimeout(() => {
-        setLoading(false)
-      }, 1000)
+        setLoading(false);
+      }, 1000);
     }
   }
 
   useEffect(() => {
     listarPokemons();
-  }, [offset])
+  }, [offset]);
 
   if (loading) {
     return (
@@ -88,7 +86,7 @@ export default function Pokemon({ navigation }: any) {
         <ActivityIndicator animating={loading} size="large" color="#7c3aed" />
         <Text style={styles.loadingText}>Carregando Pokémons...</Text>
       </View>
-    )
+    );
   }
 
   if (error) {
@@ -101,22 +99,20 @@ export default function Pokemon({ navigation }: any) {
           <Text style={styles.retryButtonText}>Tentar novamente</Text>
         </TouchableOpacity>
       </View>
-    )
+    );
   }
 
   return (
     <View style={styles.container}>
       <TouchableOpacity
-      style={styles.searchButton}
-      activeOpacity={0.75}
-      onPress={() => navigation.navigate('PokemonBusca')}
-    >
-      
-      <Feather name="search" size={18} color="#ffffff" />
-      
-      <Text style={styles.searchButtonText}>Buscar Pokémon</Text>
-    </TouchableOpacity>
+        style={styles.searchButton}
+        activeOpacity={0.75}
+        onPress={() => navigation.navigate("PokemonBusca")}
+      >
+        <Feather name="search" size={18} color="#ffffff" />
 
+        <Text style={styles.searchButtonText}>Buscar Pokémon</Text>
+      </TouchableOpacity>
 
       <View style={styles.footer}>
         <TouchableOpacity
@@ -124,7 +120,12 @@ export default function Pokemon({ navigation }: any) {
           disabled={offset === 0}
           onPress={() => setOffset(offset - 20)}
         >
-          <Text style={[styles.pageButtonText, offset === 0 && styles.pageButtonTextDisabled]}>
+          <Text
+            style={[
+              styles.pageButtonText,
+              offset === 0 && styles.pageButtonTextDisabled,
+            ]}
+          >
             ⬅ Anterior
           </Text>
         </TouchableOpacity>
@@ -150,7 +151,7 @@ export default function Pokemon({ navigation }: any) {
         showsVerticalScrollIndicator={false}
       />
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -162,9 +163,9 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 26,
-    fontWeight: 'bold',
-    color: '#4a1c96',
-    textAlign: 'center',
+    fontWeight: "bold",
+    color: "#4a1c96",
+    textAlign: "center",
     marginBottom: 12,
     letterSpacing: 1,
   },
@@ -176,15 +177,15 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   loadingText: {
-    color: '#7c3aed',
+    color: "#7c3aed",
     fontSize: 15,
-    fontWeight: '500',
+    fontWeight: "500",
   },
   listContent: {
     paddingBottom: 8,
   },
   columnWrapper: {
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     marginBottom: 10,
   },
   card: {
@@ -192,9 +193,9 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     paddingVertical: 14,
     paddingHorizontal: 10,
-    width: '48%',
-    alignItems: 'center',
-    shadowColor: '#4a1c96',
+    width: "48%",
+    alignItems: "center",
+    shadowColor: "#4a1c96",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.15,
     shadowRadius: 4,
@@ -207,21 +208,21 @@ const styles = StyleSheet.create({
   },
   pokemonName: {
     fontSize: 15,
-    fontWeight: '700',
-    color: '#2d0a6e',
+    fontWeight: "700",
+    color: "#2d0a6e",
     marginBottom: 8,
-    textAlign: 'center',
+    textAlign: "center",
   },
   detailButton: {
-    backgroundColor: '#7c3aed',
+    backgroundColor: "#7c3aed",
     borderRadius: 20,
     paddingVertical: 5,
     paddingHorizontal: 14,
   },
   detailButtonText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 12,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   footer: {
     flexDirection: "row",
@@ -230,58 +231,58 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 6,
     borderTopWidth: 1,
-    borderTopColor: '#d8c8f0',
+    borderTopColor: "#d8c8f0",
   },
   pageButton: {
-    backgroundColor: '#7c3aed',
+    backgroundColor: "#7c3aed",
     borderRadius: 20,
     paddingVertical: 8,
     paddingHorizontal: 16,
   },
   pageButtonDisabled: {
-    backgroundColor: '#c4b5d8',
+    backgroundColor: "#c4b5d8",
   },
   pageButtonText: {
-    color: '#fff',
-    fontWeight: '700',
+    color: "#fff",
+    fontWeight: "700",
     fontSize: 13,
   },
   pageButtonTextDisabled: {
-    color: '#eee',
+    color: "#eee",
   },
   pageIndicator: {
     fontSize: 14,
-    fontWeight: '600',
-    color: '#4a1c96',
+    fontWeight: "600",
+    color: "#4a1c96",
   },
   searchButton: {
-  flexDirection: 'row',          // Coloca a lupa ao lado do texto
-  alignItems: 'center',          // Alinha verticalmente no centro
-  justifyContent: 'center',      // Centraliza o conteúdo horizontalmente
-  backgroundColor: '#7c3aed',    // O roxo padrão do seu app
-  paddingVertical: 12,
-  paddingHorizontal: 24,
-  borderRadius: 12,              // Cantos arredondados modernos
-  gap: 10,                       // Espaçamento perfeito entre a lupa e o texto
-  
-  // Controla o tamanho para não esticar na tela inteira
-  width: '90%',
-  maxWidth: 320,
-  alignSelf: 'center',           // Centraliza o botão na tela
-  marginVertical: 15,
+    flexDirection: "row", // Coloca a lupa ao lado do texto
+    alignItems: "center", // Alinha verticalmente no centro
+    justifyContent: "center", // Centraliza o conteúdo horizontalmente
+    backgroundColor: "#7c3aed", // O roxo padrão do seu app
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 12, // Cantos arredondados modernos
+    gap: 10, // Espaçamento perfeito entre a lupa e o texto
 
-  // Sombra para dar profundidade (iOS)
-  shadowColor: '#7c3aed',
-  shadowOffset: { width: 0, height: 4 },
-  shadowOpacity: 0.2,
-  shadowRadius: 5,
-  // Sombra para Android
-  elevation: 4, 
-},
+    // Controla o tamanho para não esticar na tela inteira
+    width: "90%",
+    maxWidth: 320,
+    alignSelf: "center", // Centraliza o botão na tela
+    marginVertical: 15,
 
-searchButtonText: {
-  color: '#ffffff',
-  fontSize: 16,
-  fontWeight: '600',
-},
-})
+    // Sombra para dar profundidade (iOS)
+    shadowColor: "#7c3aed",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    // Sombra para Android
+    elevation: 4,
+  },
+
+  searchButtonText: {
+    color: "#ffffff",
+    fontSize: 16,
+    fontWeight: "600",
+  },
+});
