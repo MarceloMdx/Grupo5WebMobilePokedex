@@ -1,6 +1,6 @@
 import { getPokemonDescription } from "../util/getPokemondescription";
 import { useEffect, useState } from 'react'
-import { View, Text, StyleSheet, ActivityIndicator, Image, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, ActivityIndicator, Image, TouchableOpacity, ScrollView } from 'react-native'
 import { PokemonTypeTranslation } from "../constants/pokemonTypes";
 import { formatStats } from "../util/formatStats";
 interface pokemonInfo {
@@ -108,6 +108,7 @@ export default function PokemonDetails({ route }: PokemonDetailsProps) {
 
   return (
     <View style={styles.container}>
+      <ScrollView>
       <View style={styles.card}>
         <Text style={styles.title}>Pokemon Detalhes</Text>
         <Image style={styles.image} source={{uri: showShiny?pokemons?.sprites.front_shiny:pokemons?.sprites.front_default}}/>
@@ -120,20 +121,20 @@ export default function PokemonDetails({ route }: PokemonDetailsProps) {
         <Text style={styles.habilidades}> Habilidades: {" "} {pokemons?.abilities?.map(item => item.ability.name).join(", ")}</Text>
         <Text style={styles.descricao}> {"\n"} Descrição: {"\n\n"} {description}</Text>
 
-	<View style={styles.statsContainer}>
-  	<Text style={styles.statsTitle}>Estatísticas</Text>
+<View style={styles.statsContainer}>
+  <Text style={styles.statsTitle}>Estatísticas</Text>
 
-	<View style={styles.statsGrid}>
-    	<View style={styles.statsColumn}>
-      		<View style={styles.statRow}>
-        	<Text style={styles.statLabel}>❤️ HP</Text>
-        	<Text style={styles.statValue}>{stats.hp}</Text>
-      	</View>
+<View style={styles.statsGrid}>
+    <View style={styles.statsColumn}>
+        <View style={styles.statRow}>
+        <Text style={styles.statLabel}>❤️ HP</Text>
+        <Text style={styles.statValue}>{stats.hp}</Text>
+      </View>
 
-      	<View style={styles.statRow}>
-  	<Text style={styles.statLabel}>⚔️ ATQ</Text>
-        <Text style={styles.statValue}>{stats.attack}</Text>
-	</View>
+      <View style={styles.statRow}>
+  <Text style={styles.statLabel}>⚔️ ATQ</Text>
+      <Text style={styles.statValue}>{stats.attack}</Text>
+</View>
 
 	<View style={styles.statRow}>
         <Text style={styles.statLabel}>🛡️ DEF</Text>
@@ -165,6 +166,7 @@ export default function PokemonDetails({ route }: PokemonDetailsProps) {
           </TouchableOpacity>
         
       </View>
+      </ScrollView>
     </View>
   )
 }
