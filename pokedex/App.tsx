@@ -14,9 +14,15 @@
     const Stack = createStackNavigator<RootStackParamList>();
 
     export default function App() {
-    return (
-        <NavigationContainer>
+        return (
+            <NavigationContainer>
         <Stack.Navigator>
+            
+            <Stack.Screen
+            name="Pokemon"
+            component={Pokemon}
+            options={{ title: 'Pokemon' }}
+            />
 
             <Stack.Screen
             name="PokemonBusca"
@@ -24,11 +30,6 @@
             options={{ title: 'Busca Pokemon' }}
             />
 
-            <Stack.Screen
-            name="Pokemon"
-            component={Pokemon}
-            options={{ title: 'Pokemon' }}
-            />
 
             <Stack.Screen
             name="PokemonDetails"
