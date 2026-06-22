@@ -54,6 +54,7 @@ export default function Pokemon({ navigation }: any) {
 
   async function listarPokemons() {
     setLoading(true)
+    setError(undefined)
     try {
       const response = await fetch(
         `https://pokeapi.co/api/v2/pokemon?limit=20&offset=${offset}`
@@ -85,6 +86,19 @@ export default function Pokemon({ navigation }: any) {
       <View style={styles.loading}>
         <ActivityIndicator animating={loading} size="large" color="#7c3aed" />
         <Text style={styles.loadingText}>Carregando Pokémons...</Text>
+      </View>
+    )
+  }
+
+  if (error) {
+    return (
+      <View style={styles.errorContainer}>
+        <Text style={styles.errorIcon}>⚠️</Text>
+        <Text style={styles.errorTitle}>Algo deu errado</Text>
+        <Text style={styles.errorMessage}>{error}</Text>
+        <TouchableOpacity style={styles.retryButton} onPress={listarPokemons}>
+          <Text style={styles.retryButtonText}>Tentar novamente</Text>
+        </TouchableOpacity>
       </View>
     )
   }
@@ -227,5 +241,38 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '600',
     color: '#4a1c96',
+  },
+  errorContainer: {
+    flex: 1,
+    backgroundColor: '#f0eaf8',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 32,
+    gap: 12,
+  },
+  errorIcon: {
+    fontSize: 48,
+  },
+  errorTitle: {
+    fontSize: 20,
+    fontWeight: '700',
+    color: '#2d0a6e',
+  },
+  errorMessage: {
+    fontSize: 14,
+    color: '#6b7280',
+    textAlign: 'center',
+  },
+  retryButton: {
+    marginTop: 8,
+    backgroundColor: '#7c3aed',
+    borderRadius: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 28,
+  },
+  retryButtonText: {
+    color: '#fff',
+    fontWeight: '700',
+    fontSize: 14,
   },
 })
