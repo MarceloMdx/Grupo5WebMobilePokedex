@@ -8,6 +8,7 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native'
+import { Feather } from '@expo/vector-icons';
 import React, { useEffect, useState } from 'react'
 
 const IMAGE = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon"
@@ -105,17 +106,17 @@ export default function Pokemon({ navigation }: any) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Pokédex</Text>
+      <TouchableOpacity
+      style={styles.searchButton}
+      activeOpacity={0.75}
+      onPress={() => navigation.navigate('PokemonBusca')}
+    >
+      
+      <Feather name="search" size={18} color="#ffffff" />
+      
+      <Text style={styles.searchButtonText}>Buscar Pokémon</Text>
+    </TouchableOpacity>
 
-      <FlatList
-        data={pokemons}
-        renderItem={renderItem}
-        keyExtractor={(item, index) => index.toString()}
-        numColumns={2}
-        columnWrapperStyle={styles.columnWrapper}
-        contentContainerStyle={styles.listContent}
-        showsVerticalScrollIndicator={false}
-      />
 
       <View style={styles.footer}>
         <TouchableOpacity
@@ -137,6 +138,17 @@ export default function Pokemon({ navigation }: any) {
           <Text style={styles.pageButtonText}>Próximo ➡</Text>
         </TouchableOpacity>
       </View>
+      <Text style={styles.title}>Pokédex</Text>
+
+      <FlatList
+        data={pokemons}
+        renderItem={renderItem}
+        keyExtractor={(item, index) => index.toString()}
+        numColumns={2}
+        columnWrapperStyle={styles.columnWrapper}
+        contentContainerStyle={styles.listContent}
+        showsVerticalScrollIndicator={false}
+      />
     </View>
   )
 }
@@ -242,37 +254,34 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#4a1c96',
   },
-  errorContainer: {
-    flex: 1,
-    backgroundColor: '#f0eaf8',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 32,
-    gap: 12,
-  },
-  errorIcon: {
-    fontSize: 48,
-  },
-  errorTitle: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: '#2d0a6e',
-  },
-  errorMessage: {
-    fontSize: 14,
-    color: '#6b7280',
-    textAlign: 'center',
-  },
-  retryButton: {
-    marginTop: 8,
-    backgroundColor: '#7c3aed',
-    borderRadius: 20,
-    paddingVertical: 10,
-    paddingHorizontal: 28,
-  },
-  retryButtonText: {
-    color: '#fff',
-    fontWeight: '700',
-    fontSize: 14,
-  },
+  searchButton: {
+  flexDirection: 'row',          // Coloca a lupa ao lado do texto
+  alignItems: 'center',          // Alinha verticalmente no centro
+  justifyContent: 'center',      // Centraliza o conteúdo horizontalmente
+  backgroundColor: '#7c3aed',    // O roxo padrão do seu app
+  paddingVertical: 12,
+  paddingHorizontal: 24,
+  borderRadius: 12,              // Cantos arredondados modernos
+  gap: 10,                       // Espaçamento perfeito entre a lupa e o texto
+  
+  // Controla o tamanho para não esticar na tela inteira
+  width: '90%',
+  maxWidth: 320,
+  alignSelf: 'center',           // Centraliza o botão na tela
+  marginVertical: 15,
+
+  // Sombra para dar profundidade (iOS)
+  shadowColor: '#7c3aed',
+  shadowOffset: { width: 0, height: 4 },
+  shadowOpacity: 0.2,
+  shadowRadius: 5,
+  // Sombra para Android
+  elevation: 4, 
+},
+
+searchButtonText: {
+  color: '#ffffff',
+  fontSize: 16,
+  fontWeight: '600',
+},
 })
