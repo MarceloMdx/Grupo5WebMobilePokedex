@@ -55,6 +55,7 @@ export default function Pokemon({ navigation }: any) {
 
   async function listarPokemons() {
     setLoading(true)
+    setError(undefined)
     try {
       const response = await fetch(
         `https://pokeapi.co/api/v2/pokemon?limit=20&offset=${offset}`
@@ -86,6 +87,19 @@ export default function Pokemon({ navigation }: any) {
       <View style={styles.loading}>
         <ActivityIndicator animating={loading} size="large" color="#7c3aed" />
         <Text style={styles.loadingText}>Carregando Pokémons...</Text>
+      </View>
+    )
+  }
+
+  if (error) {
+    return (
+      <View style={styles.errorContainer}>
+        <Text style={styles.errorIcon}>⚠️</Text>
+        <Text style={styles.errorTitle}>Algo deu errado</Text>
+        <Text style={styles.errorMessage}>{error}</Text>
+        <TouchableOpacity style={styles.retryButton} onPress={listarPokemons}>
+          <Text style={styles.retryButtonText}>Tentar novamente</Text>
+        </TouchableOpacity>
       </View>
     )
   }
