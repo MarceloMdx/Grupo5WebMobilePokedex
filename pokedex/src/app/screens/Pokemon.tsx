@@ -163,6 +163,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 26,
+    fontFamily: 'Arial',
     fontWeight: 'bold',
     color: '#ffcb05',
     textAlign: 'center',
@@ -182,6 +183,7 @@ const styles = StyleSheet.create({
   loadingText: {
     color: '#ffcb05',
     fontSize: 15,
+    fontFamily: 'Arial',
     fontWeight: '500',
   },
   errorContainer: {
@@ -198,6 +200,7 @@ const styles = StyleSheet.create({
   errorTitle: {
     color: "#ffcb05",
     fontSize: 22,
+    fontFamily: "Arial",
     fontWeight: "bold",
     marginBottom: 8,
     textAlign: "center",
@@ -205,6 +208,7 @@ const styles = StyleSheet.create({
   errorMessage: {
     color: "#fff7d1",
     fontSize: 15,
+    fontFamily: "Arial",
     textAlign: "center",
     marginBottom: 16,
   },
@@ -218,6 +222,7 @@ const styles = StyleSheet.create({
   },
   retryButtonText: {
     color: "#1d3f8f",
+    fontFamily: "Arial",
     fontWeight: "bold",
   },
   listContent: {
@@ -260,6 +265,7 @@ const styles = StyleSheet.create({
   },
   pokemonName: {
     fontSize: 15,
+    fontFamily: 'Arial',
     fontWeight: '700',
     color: '#1d3f8f',
     marginBottom: 8,
@@ -276,6 +282,7 @@ const styles = StyleSheet.create({
   detailButtonText: {
     color: '#1d3f8f',
     fontSize: 12,
+    fontFamily: 'Arial',
     fontWeight: '600',
   },
   footer: {
@@ -300,6 +307,7 @@ const styles = StyleSheet.create({
   },
   pageButtonText: {
     color: '#1d3f8f',
+    fontFamily: 'Arial',
     fontWeight: '700',
     fontSize: 13,
   },
@@ -308,6 +316,7 @@ const styles = StyleSheet.create({
   },
   pageIndicator: {
     fontSize: 14,
+    fontFamily: 'Arial',
     fontWeight: '600',
     color: '#ffcb05',
   },
@@ -341,6 +350,7 @@ const styles = StyleSheet.create({
 searchButtonText: {
   color: '#1d3f8f',
   fontSize: 16,
+  fontFamily: 'Arial',
   fontWeight: '600',
 },
 })
