@@ -91,18 +91,11 @@ export default function Pokemon({ navigation }: any) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Pokédex</Text>
-
-      <FlatList
-        data={pokemons}
-        renderItem={renderItem}
-        keyExtractor={(item, index) => index.toString()}
-        numColumns={2}
-        columnWrapperStyle={styles.columnWrapper}
-        contentContainerStyle={styles.listContent}
-        showsVerticalScrollIndicator={false}
-      />
-
+      <TouchableOpacity
+        style={styles.card}
+        activeOpacity={0.75}
+        onPress={() => navigation.navigate('PokemonBusca')}
+      ><Text>Busca</Text></TouchableOpacity>
       <View style={styles.footer}>
         <TouchableOpacity
           style={[styles.pageButton, offset === 0 && styles.pageButtonDisabled]}
@@ -123,6 +116,17 @@ export default function Pokemon({ navigation }: any) {
           <Text style={styles.pageButtonText}>Próximo ➡</Text>
         </TouchableOpacity>
       </View>
+      <Text style={styles.title}>Pokédex</Text>
+
+      <FlatList
+        data={pokemons}
+        renderItem={renderItem}
+        keyExtractor={(item, index) => index.toString()}
+        numColumns={2}
+        columnWrapperStyle={styles.columnWrapper}
+        contentContainerStyle={styles.listContent}
+        showsVerticalScrollIndicator={false}
+      />
     </View>
   )
 }
