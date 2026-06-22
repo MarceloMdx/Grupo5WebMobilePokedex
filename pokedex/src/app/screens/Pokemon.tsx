@@ -146,7 +146,7 @@ export default function Pokemon({ navigation }: any) {
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
         numColumns={2}
-        columnWrapperStyle={styles.columnWrapper}
+        columnWrapperStyle={styles.columnWrappeper}
         contentContainerStyle={styles.listContent}
         showsVerticalScrollIndicator={false}
       />
@@ -157,45 +157,97 @@ export default function Pokemon({ navigation }: any) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f0eaf8",
+    backgroundColor: "#2a5db0",
     paddingHorizontal: 10,
     paddingTop: 12,
   },
   title: {
     fontSize: 26,
-    fontWeight: "bold",
-    color: "#4a1c96",
-    textAlign: "center",
+    fontWeight: 'bold',
+    color: '#ffcb05',
+    textAlign: 'center',
     marginBottom: 12,
     letterSpacing: 1,
+    textShadowColor: '#1d3f8f',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 1,
   },
   loading: {
     flex: 1,
-    backgroundColor: "#f0eaf8",
+    backgroundColor: "#2a5db0",
     alignItems: "center",
     justifyContent: "center",
     gap: 12,
   },
   loadingText: {
-    color: "#7c3aed",
+    color: '#ffcb05',
     fontSize: 15,
-    fontWeight: "500",
+    fontWeight: '500',
   },
-  listContent: {
-    paddingBottom: 8,
+  errorContainer: {
+    flex: 1,
+    backgroundColor: "#2a5db0",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 20,
   },
-  columnWrapper: {
-    justifyContent: "space-between",
+  errorIcon: {
+    fontSize: 34,
     marginBottom: 10,
   },
+  errorTitle: {
+    color: "#ffcb05",
+    fontSize: 22,
+    fontWeight: "bold",
+    marginBottom: 8,
+    textAlign: "center",
+  },
+  errorMessage: {
+    color: "#fff7d1",
+    fontSize: 15,
+    textAlign: "center",
+    marginBottom: 16,
+  },
+  retryButton: {
+    backgroundColor: "#ffcb05",
+    borderWidth: 2,
+    borderColor: "#1d3f8f",
+    borderRadius: 20,
+    paddingVertical: 8,
+    paddingHorizontal: 18,
+  },
+  retryButtonText: {
+    color: "#1d3f8f",
+    fontWeight: "bold",
+  },
+  listContent: {
+    paddingBottom: 24,
+  },
+  columnWrappeper: {
+    justifyContent: 'space-between',
+    marginBottom: 10,
+  },
+  list: {
+    flex: 1,
+    minHeight: 0,
+    overflow: 'scroll',
+  },
+  grid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    rowGap: 10,
+  },
   card: {
-    backgroundColor: "#cebceb",
+    backgroundColor: "#fff7d1",
+    borderWidth: 2,
+    borderColor: '#ffcb05',
     borderRadius: 12,
     paddingVertical: 14,
     paddingHorizontal: 10,
-    width: "48%",
-    alignItems: "center",
-    shadowColor: "#4a1c96",
+    width: '48%',
+    alignItems: 'center',
+    shadowColor: '#1d3f8f',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.15,
     shadowRadius: 4,
@@ -208,21 +260,23 @@ const styles = StyleSheet.create({
   },
   pokemonName: {
     fontSize: 15,
-    fontWeight: "700",
-    color: "#2d0a6e",
+    fontWeight: '700',
+    color: '#1d3f8f',
     marginBottom: 8,
-    textAlign: "center",
+    textAlign: 'center',
   },
   detailButton: {
-    backgroundColor: "#7c3aed",
+    backgroundColor: '#ffcb05',
+    borderWidth: 2,
+    borderColor: '#2a5db0',
     borderRadius: 20,
     paddingVertical: 5,
     paddingHorizontal: 14,
   },
   detailButtonText: {
-    color: "#fff",
+    color: '#1d3f8f',
     fontSize: 12,
-    fontWeight: "600",
+    fontWeight: '600',
   },
   footer: {
     flexDirection: "row",
@@ -231,58 +285,62 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 6,
     borderTopWidth: 1,
-    borderTopColor: "#d8c8f0",
+    borderTopColor: '#ffcb05',
   },
   pageButton: {
-    backgroundColor: "#7c3aed",
+    backgroundColor: '#ffcb05',
+    borderWidth: 2,
+    borderColor: '#1d3f8f',
     borderRadius: 20,
     paddingVertical: 8,
     paddingHorizontal: 16,
   },
   pageButtonDisabled: {
-    backgroundColor: "#c4b5d8",
+    backgroundColor: '#7fa3dc',
   },
   pageButtonText: {
-    color: "#fff",
-    fontWeight: "700",
+    color: '#1d3f8f',
+    fontWeight: '700',
     fontSize: 13,
   },
   pageButtonTextDisabled: {
-    color: "#eee",
+    color: '#dbe8ff',
   },
   pageIndicator: {
     fontSize: 14,
-    fontWeight: "600",
-    color: "#4a1c96",
+    fontWeight: '600',
+    color: '#ffcb05',
   },
   searchButton: {
-    flexDirection: "row", // Coloca a lupa ao lado do texto
-    alignItems: "center", // Alinha verticalmente no centro
-    justifyContent: "center", // Centraliza o conteúdo horizontalmente
-    backgroundColor: "#7c3aed", // O roxo padrão do seu app
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    borderRadius: 12, // Cantos arredondados modernos
-    gap: 10, // Espaçamento perfeito entre a lupa e o texto
+  flexDirection: 'row',          // Coloca a lupa ao lado do texto
+  alignItems: 'center',          // Alinha verticalmente no centro
+  justifyContent: 'center',      // Centraliza o conteúdo horizontalmente
+  backgroundColor: '#ffcb05',
+  borderWidth: 2,
+  borderColor: '#1d3f8f',
+  paddingVertical: 12,
+  paddingHorizontal: 24,
+  borderRadius: 12,              // Cantos arredondados modernos
+  gap: 10,                       // Espaçamento perfeito entre a lupa e o texto
+  
+  // Controla o tamanho para não esticar na tela inteira
+  width: '90%',
+  maxWidth: 320,
+  alignSelf: 'center',           // Centraliza o botão na tela
+  marginVertical: 15,
 
-    // Controla o tamanho para não esticar na tela inteira
-    width: "90%",
-    maxWidth: 320,
-    alignSelf: "center", // Centraliza o botão na tela
-    marginVertical: 15,
+  // Sombra para dar profundidade (iOS)
+  shadowColor: '#1d3f8f',
+  shadowOffset: { width: 0, height: 4 },
+  shadowOpacity: 0.2,
+  shadowRadius: 5,
+  // Sombra para Android
+  elevation: 4, 
+},
 
-    // Sombra para dar profundidade (iOS)
-    shadowColor: "#7c3aed",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    // Sombra para Android
-    elevation: 4,
-  },
-
-  searchButtonText: {
-    color: "#ffffff",
-    fontSize: 16,
-    fontWeight: "600",
-  },
-});
+searchButtonText: {
+  color: '#1d3f8f',
+  fontSize: 16,
+  fontWeight: '600',
+},
+})

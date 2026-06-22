@@ -5,9 +5,9 @@ export const formatStats = (stats: any[]) => {
   return {
     hp: getStat("hp"),
     attack: getStat("attack"),
-    defense: getStat("defensa"),
-    speed: getStat("velocidade"),
+    defense: getStat("defense"),
+    speed: getStat("speed"),
     specialAttack: getStat("special-attack"),
-    specialDefense: getStat("special-defensa"),
+    specialDefense: getStat("special-defense"),
   };
 };

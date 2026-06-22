@@ -106,13 +106,14 @@
     container: {
         flex: 1,
         padding: 10,
-        backgroundColor: "#f5f5f5",
+        backgroundColor: "#2a5db0",
     },
 
     loading: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
+        backgroundColor: "#2a5db0",
     },
 
     title: {
@@ -120,29 +121,51 @@
         fontWeight: "bold",
         textAlign: "center",
         marginBottom: 15,
+        color: "#ffcb05",
+        textShadowColor: "#1d3f8f",
+        textShadowOffset: { width: 2, height: 2 },
+        textShadowRadius: 1,
     },
 
     input: {
-        backgroundColor: "#fff",
-        borderWidth: 1,
-        borderColor: "#999",
+        backgroundColor: "#fff7d1",
+        borderWidth: 2,
+        borderColor: "#ffcb05",
         borderRadius: 8,
         padding: 12,
         marginBottom: 15,
+        color: "#1d3f8f",
+    },
+
+    list: {
+        flex: 1,
+        minHeight: 0,
+    },
+
+    listContent: {
+        paddingBottom: 20,
     },
 
     card: {
-        backgroundColor: "#cebceb",
+        backgroundColor: "#fff7d1",
+        borderWidth: 2,
+        borderColor: "#ffcb05",
         padding: 15,
         marginBottom: 10,
         borderRadius: 8,
         alignItems: "center",
+        shadowColor: "#1d3f8f",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.16,
+        shadowRadius: 4,
+        elevation: 3,
     },
 
     name: {
         fontSize: 18,
         fontWeight: "bold",
         textTransform: "capitalize",
+        color: "#1d3f8f",
     },
 
     image: {
@@ -152,14 +175,16 @@
     },
 
     button: {
-        backgroundColor: "#ef5350",
+        backgroundColor: "#ffcb05",
+        borderWidth: 2,
+        borderColor: "#1d3f8f",
         paddingHorizontal: 15,
         paddingVertical: 8,
         borderRadius: 8,
     },
 
     buttonText: {
-        color: "#fff",
+        color: "#1d3f8f",
         fontWeight: "bold",
     },
     });
