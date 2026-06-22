@@ -1,4 +1,13 @@
-import { View, Text, StyleSheet, FlatList, ListRenderItem, ActivityIndicator, Image, TouchableOpacity, Button } from 'react-native'
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  ListRenderItem,
+  ActivityIndicator,
+  Image,
+  TouchableOpacity,
+} from 'react-native'
 import React, { useEffect, useState } from 'react'
 
 const IMAGE = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon"
@@ -10,33 +19,36 @@ type PokemonProps = {
 
 function getPokemonImage(url: string) {
   const pokemonId = url.split('/').filter(Boolean).pop();
-  console.log("pokeid:", `${IMAGE}/${pokemonId}.png`)
-  return (
-    `${IMAGE}/${pokemonId}.png`
-  )
+  return `${IMAGE}/${pokemonId}.png`;
 }
 
+function capitalize(name: string) {
+  return name.charAt(0).toUpperCase() + name.slice(1);
+}
 
 export default function Pokemon({ navigation }: any) {
 
   const [offset, setOffset] = useState(0);
-
   const [pokemons, setPokemons] = useState<any>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
 
   const renderItem: ListRenderItem<PokemonProps> = ({ item }) => {
     return (
-      <View style={styles.card}>
-        <Text>{item.name}</Text>
-        <Image style={styles.image} source={{
-          uri: getPokemonImage(item.url),
-        }} />
-        <TouchableOpacity onPress={() => navigation.navigate("PokemonDetails", item)}>
-          <Text>Detalhe</Text>
-        </TouchableOpacity>
-
-      </View>
+      <TouchableOpacity
+        style={styles.card}
+        activeOpacity={0.75}
+        onPress={() => navigation.navigate("PokemonDetails", item)}
+      >
+        <Image
+          style={styles.image}
+          source={{ uri: getPokemonImage(item.url) }}
+        />
+        <Text style={styles.pokemonName}>{capitalize(item.name)}</Text>
+        <View style={styles.detailButton}>
+          <Text style={styles.detailButtonText}>Ver detalhes →</Text>
+        </View>
+      </TouchableOpacity>
     )
   }
 
@@ -47,11 +59,10 @@ export default function Pokemon({ navigation }: any) {
         `https://pokeapi.co/api/v2/pokemon?limit=20&offset=${offset}`
       );
       const data = await response.json()
-      console.log('resposta', data.results)
       setPokemons(data.results)
 
       if (!response.ok) {
-        throw new Error("Nao foi possivel carregar os pokemons")
+        throw new Error("Não foi possível carregar os pokémons")
       }
 
     } catch (error: any) {
@@ -61,8 +72,7 @@ export default function Pokemon({ navigation }: any) {
     } finally {
       setTimeout(() => {
         setLoading(false)
-      }, 1000) //arrumar depois
-
+      }, 1000)
     }
   }
 
@@ -73,35 +83,46 @@ export default function Pokemon({ navigation }: any) {
   if (loading) {
     return (
       <View style={styles.loading}>
-        <ActivityIndicator animating={loading} size={'small'} color={"#d30d0d"} />
+        <ActivityIndicator animating={loading} size="large" color="#7c3aed" />
+        <Text style={styles.loadingText}>Carregando Pokémons...</Text>
       </View>
     )
   }
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-            <TouchableOpacity
-              disabled={offset === 0}
-              onPress={() => setOffset(offset - 20)}
-            >
-              <Text>⬅ Anterior</Text>
-            </TouchableOpacity>
+      <Text style={styles.title}>Pokédex</Text>
 
-            <Text>Página {offset / 20 + 1}</Text>
-
-            <TouchableOpacity
-              onPress={() => setOffset(offset + 20)}
-            >
-              <Text>Próximo ➡</Text>
-            </TouchableOpacity>
-          </View>
       <FlatList
         data={pokemons}
         renderItem={renderItem}
         keyExtractor={(item, index) => index.toString()}
-        scrollEnabled={true}
+        numColumns={2}
+        columnWrapperStyle={styles.columnWrapper}
+        contentContainerStyle={styles.listContent}
+        showsVerticalScrollIndicator={false}
       />
+
+      <View style={styles.footer}>
+        <TouchableOpacity
+          style={[styles.pageButton, offset === 0 && styles.pageButtonDisabled]}
+          disabled={offset === 0}
+          onPress={() => setOffset(offset - 20)}
+        >
+          <Text style={[styles.pageButtonText, offset === 0 && styles.pageButtonTextDisabled]}>
+            ⬅ Anterior
+          </Text>
+        </TouchableOpacity>
+
+        <Text style={styles.pageIndicator}>Página {offset / 20 + 1}</Text>
+
+        <TouchableOpacity
+          style={styles.pageButton}
+          onPress={() => setOffset(offset + 20)}
+        >
+          <Text style={styles.pageButtonText}>Próximo ➡</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   )
 }
@@ -109,37 +130,102 @@ export default function Pokemon({ navigation }: any) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f5f5f5", // Corrigido para 6 dígitos
-    padding: 10,
+    backgroundColor: "#f0eaf8",
+    paddingHorizontal: 10,
+    paddingTop: 12,
   },
   title: {
-    fontSize: 24,
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: '#4a1c96',
+    textAlign: 'center',
+    marginBottom: 12,
+    letterSpacing: 1,
   },
   loading: {
     flex: 1,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: "#f0eaf8",
     alignItems: "center",
     justifyContent: "center",
+    gap: 12,
+  },
+  loadingText: {
+    color: '#7c3aed',
+    fontSize: 15,
+    fontWeight: '500',
+  },
+  listContent: {
+    paddingBottom: 8,
+  },
+  columnWrapper: {
+    justifyContent: 'space-between',
+    marginBottom: 10,
   },
   card: {
-    paddingVertical: 10,
-    paddingHorizontal: 20,
     backgroundColor: "#cebceb",
-    margin: 4,
-    borderRadius: 8,
-    alignSelf: 'center',
-    width: '45%',
+    borderRadius: 12,
+    paddingVertical: 14,
+    paddingHorizontal: 10,
+    width: '48%',
     alignItems: 'center',
+    shadowColor: '#4a1c96',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 4,
+    elevation: 3,
   },
   image: {
-    margin: 6,
-    width: 60,
-    height: 60,
+    width: 72,
+    height: 72,
+    marginBottom: 6,
   },
-  header: {
+  pokemonName: {
+    fontSize: 15,
+    fontWeight: '700',
+    color: '#2d0a6e',
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  detailButton: {
+    backgroundColor: '#7c3aed',
+    borderRadius: 20,
+    paddingVertical: 5,
+    paddingHorizontal: 14,
+  },
+  detailButtonText: {
+    color: '#fff',
+    fontSize: 12,
+    fontWeight: '600',
+  },
+  footer: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: 20,
-  }
+    paddingVertical: 12,
+    paddingHorizontal: 6,
+    borderTopWidth: 1,
+    borderTopColor: '#d8c8f0',
+  },
+  pageButton: {
+    backgroundColor: '#7c3aed',
+    borderRadius: 20,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+  },
+  pageButtonDisabled: {
+    backgroundColor: '#c4b5d8',
+  },
+  pageButtonText: {
+    color: '#fff',
+    fontWeight: '700',
+    fontSize: 13,
+  },
+  pageButtonTextDisabled: {
+    color: '#eee',
+  },
+  pageIndicator: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#4a1c96',
+  },
 })
