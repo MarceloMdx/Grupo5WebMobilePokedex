@@ -1,4 +1,4 @@
-import { getPokemonDescription } from "../util/getPokemonDescription";
+import { getPokemonDescription } from "../util/getPokemondescription";
 import { useEffect, useState } from 'react'
 import { View, Text, StyleSheet, ActivityIndicator, Image, TouchableOpacity } from 'react-native'
 import { PokemonTypeTranslation } from "../constants/pokemonTypes";
@@ -138,7 +138,7 @@ export default function PokemonDetails({ route }: PokemonDetailsProps) {
 	<View style={styles.statRow}>
         <Text style={styles.statLabel}>🛡️ DEF</Text>
         <Text style={styles.statValue}>{stats.defense}</Text>
-      	</View>
+  </View>
     </View>
 
     <View style={styles.statsColumn}>
@@ -168,104 +168,168 @@ export default function PokemonDetails({ route }: PokemonDetailsProps) {
     </View>
   )
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    padding: 2,
-    alignItems: "center",
-
+    backgroundColor: '#dddddd',
+    padding: 16,
   },
-  screenTitle: {
-  fontSize: 24,
-  paddingBottom: 12,
-},
   loading: {
     flex: 1,
-    backgroundColor: "#f5f5f5",
-    alignItems: "center",
-    justifyContent: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f5f5f5',
   },
   card: {
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    backgroundColor: "#cebceb",
-    margin: 4,
-    borderRadius: 8,
-    justifyContent:"center",
-    alignItems: "center",
-    width: "95%",
-
+    backgroundColor: '#ffffff',
+    borderRadius: 20,
+    padding: 20,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 5,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 10,
+    textTransform: 'uppercase',
+    letterSpacing: 1,
   },
   image: {
-    margin: 6,
-    width: 120,
-    height: 120,
+    width: 180,
+    height: 180,
+    resizeMode: 'contain',
+    marginVertical: 10,
+    backgroundColor: '#f9f9f9',
+    borderRadius: 90,
   },
-
+  name: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#111',
+    textTransform: 'capitalize',
+    marginBottom: 8,
+  },
+  id: {
+    fontSize: 16,
+    color: '#666',
+    fontWeight: '600',
+    marginBottom: 12,
+  },
+  altura: {
+    fontSize: 16,
+    color: '#444',
+    marginBottom: 4,
+  },
+  peso: {
+    fontSize: 16,
+    color: '#444',
+    marginBottom: 4,
+  },
+  experiencia: {
+    fontSize: 16,
+    color: '#444',
+    marginBottom: 4,
+  },
+  tipo: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#d30d0d',
+    marginVertical: 6,
+  },
+  habilidades: {
+    fontSize: 15,
+    color: '#555',
+    fontStyle: 'italic',
+    marginBottom: 10,
+  },
+  descricao: {
+    fontSize: 14,
+    color: '#666',
+    textAlign: 'center',
+    lineHeight: 20,
+    paddingHorizontal: 10,
+    backgroundColor: '#f9f9f9',
+    borderRadius: 10,
+    paddingBottom: 12,
+    width: '100%',
+    marginVertical: 12,
+  },
+  // Seção de Estatísticas (Stats)
+  statsContainer: {
+    width: '100%',
+    backgroundColor: '#fcfcfc',
+    borderRadius: 15,
+    padding: 14,
+    borderWidth: 1,
+    borderColor: '#eee',
+    marginVertical: 15,
+  },
+  statsTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#333',
+    textAlign: 'center',
+    marginBottom: 12,
+  },
+  statsGrid: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  statsColumn: {
+    flex: 1,
+    paddingHorizontal: 6,
+  },
+  statRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    paddingVertical: 8,
+    paddingHorizontal: 10,
+    borderRadius: 8,
+    marginBottom: 8,
+    borderWidth: 1,
+    borderColor: '#f0f0f0',
+    // Pequena sombra para os blocos de status
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 1,
+  },
+  statLabel: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: '#555',
+  },
+  statValue: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#222',
+  },
+  // Botão Shiny
   button: {
-  backgroundColor: "#ef5350",
-
-  padding: 10,
-
-  borderRadius: 8,
-
-  marginVertical: 10,
-},
-
-buttonText: {
-  color: "#fff",
-
-  fontWeight: "bold",
-},
-
-
-
-statsContainer: {
-  marginTop: 20,
-  padding: 15,
-  backgroundColor: "#1e1e1e",
-  borderRadius: 12,
-  width: "100%",
-},
-
-statsTitle: {
-  fontSize: 18,
-  fontWeight: "bold",
-  marginBottom: 15,
-  color: "#fff",
-  textAlign: "center",
-},
-
-statsGrid: {
-  flexDirection: "row",
-  justifyContent: "space-between",
-},
-
-statsColumn: {
-  flex: 1,
-  paddingHorizontal: 8,
-},
-
-statRow: {
-  flexDirection: "row",
-  justifyContent: "space-between",
-  paddingVertical: 8,
-  borderBottomWidth: 0.5,
-  borderBottomColor: "#333",
-},
-
-statLabel: {
-  color: "#81d4fa",
-  fontWeight: "bold",
-  fontSize: 14,
-},
-
-statValue: {
-  color: "#ffffff",
-  fontWeight: "600",
-  fontSize: 14,
-},
-
-})
+    backgroundColor: '#d30d0d',
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 25,
+    marginTop: 10,
+    width: '80%',
+    alignItems: 'center',
+    shadowColor: '#d30d0d',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 4,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+});
