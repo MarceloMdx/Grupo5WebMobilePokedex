@@ -1,3 +1,4 @@
+import { getPokemonDescription } from "../util/getPokemonDescription";
 import { useEffect, useState } from 'react'
 import { View, Text, StyleSheet, ActivityIndicator, Image, TouchableOpacity } from 'react-native'
 import { PokemonTypeTranslation } from "../constants/pokemonTypes";
@@ -55,8 +56,10 @@ export default function PokemonDetails({ route }: PokemonDetailsProps) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [showShiny, setShowShiny] = useState(false);
-  const [description, setDescription] = useState("");
+  const [speciesData, setSpeciesData] = useState<any>(null);
+  const description = speciesData?getPokemonDescription(speciesData):"Carregando descrição...";
   const stats = formatStats(pokemons?.stats || []);
+
   
 
   console.log('route', route.params.url)
@@ -80,30 +83,14 @@ export default function PokemonDetails({ route }: PokemonDetailsProps) {
   }
 
   async function getDescription(url: string) {
-
   try {
-
     const response = await fetch(url);
-
     const data = await response.json();
 
-    const texto = data.flavor_text_entries.find(
-      (item: any) => item.language.name === "en"
-    );
-
-    setDescription(
-      texto?.flavor_text.replace(/\f/g, " ")
-      || "Sem descrição."
-    );
-
-  }
-
-  catch (error) {
-
+    setSpeciesData(data);
+  } catch (error) {
     console.log(error);
-
   }
-
 }
 
 
@@ -132,6 +119,47 @@ export default function PokemonDetails({ route }: PokemonDetailsProps) {
         <Text style={styles.tipo}> Tipo: {" "} {pokemons?.types?.map(item => PokemonTypeTranslation[item.type.name] || item.type.name).join(", ")}</Text>
         <Text style={styles.habilidades}> Habilidades: {" "} {pokemons?.abilities?.map(item => item.ability.name).join(", ")}</Text>
         <Text style={styles.descricao}> {"\n"} Descrição: {"\n\n"} {description}</Text>
+
+	<View style={styles.statsContainer}>
+  	<Text style={styles.statsTitle}>Estatísticas</Text>
+
+	<View style={styles.statsGrid}>
+    	<View style={styles.statsColumn}>
+      		<View style={styles.statRow}>
+        	<Text style={styles.statLabel}>❤️ HP</Text>
+        	<Text style={styles.statValue}>{stats.hp}</Text>
+      	</View>
+
+      	<View style={styles.statRow}>
+  	<Text style={styles.statLabel}>⚔️ ATQ</Text>
+        <Text style={styles.statValue}>{stats.attack}</Text>
+	</View>
+
+	<View style={styles.statRow}>
+        <Text style={styles.statLabel}>🛡️ DEF</Text>
+        <Text style={styles.statValue}>{stats.defense}</Text>
+      	</View>
+    </View>
+
+    <View style={styles.statsColumn}>
+      <View style={styles.statRow}>
+        <Text style={styles.statLabel}>⚡ SPD</Text>
+        <Text style={styles.statValue}>{stats.speed}</Text>
+      </View>
+
+      <View style={styles.statRow}>
+        <Text style={styles.statLabel}>✨ SPC ATQ</Text>
+        <Text style={styles.statValue}>{stats.specialAttack}</Text>
+      </View>
+
+      <View style={styles.statRow}>
+        <Text style={styles.statLabel}>🛡️ SPC DEF</Text>
+        <Text style={styles.statValue}>{stats.specialDefense}</Text>
+      </View>
+    </View>
+  </View>
+</View>
+
         <TouchableOpacity style={styles.button} onPress={() => setShowShiny(!showShiny)}>
           <Text style={styles.buttonText}> {showShiny ? "Ver imagem normal" : "Ver versão Shiny"}</Text>
           </TouchableOpacity>
@@ -167,6 +195,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     justifyContent:"center",
     alignItems: "center",
+    width: "95%",
 
   },
   image: {
@@ -191,27 +220,7 @@ buttonText: {
   fontWeight: "bold",
 },
 
-statsContainer: {
-  marginTop: 20,
-  padding: 15,
-  backgroundColor: "#1e1e1e",
-  borderRadius: 12,
-},
 
-statsTitle: {
-  fontSize: 18,
-  fontWeight: "bold",
-  marginBottom: 10,
-  color: "#fff",
-},
-
-statRow: {
-  flexDirection: "row",
-  justifyContent: "space-between",
-  paddingVertical: 6,
-  borderBottomWidth: 0.5,
-  borderBottomColor: "#333",
-},
 
 statsContainer: {
   marginTop: 20,
@@ -221,7 +230,7 @@ statsContainer: {
   width: "100%",
 },
 
-statsTitlew: {
+statsTitle: {
   fontSize: 18,
   fontWeight: "bold",
   marginBottom: 15,
