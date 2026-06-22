@@ -33,7 +33,7 @@
 
         try {
         const response = await fetch(
-            "https://pokeapi.co/api/v2/pokemon?limit=9999"
+            "https://pokeapi.co/api/v2/pokemon?limit=99999"
         );
 
         const data = await response.json();
@@ -118,6 +118,7 @@
 
     title: {
         fontSize: 24,
+        fontFamily: "Arial",
         fontWeight: "bold",
         textAlign: "center",
         marginBottom: 15,
@@ -129,6 +130,7 @@
 
     input: {
         backgroundColor: "#fff7d1",
+        fontFamily: "Arial",
         borderWidth: 2,
         borderColor: "#ffcb05",
         borderRadius: 8,
@@ -163,6 +165,7 @@
 
     name: {
         fontSize: 18,
+        fontFamily: "Arial",
         fontWeight: "bold",
         textTransform: "capitalize",
         color: "#1d3f8f",
@@ -185,6 +188,7 @@
 
     buttonText: {
         color: "#1d3f8f",
+        fontFamily: "Arial",
         fontWeight: "bold",
     },
     });

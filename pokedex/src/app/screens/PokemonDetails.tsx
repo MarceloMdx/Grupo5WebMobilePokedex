@@ -162,17 +162,17 @@ export default function PokemonDetails({ route }: PokemonDetailsProps) {
           <View style={styles.infoGrid}>
             <View style={styles.infoBox}>
               <Text style={styles.infoLabel}>Altura</Text>
-              <Text style={styles.infoValue}>{pokemon?.height}</Text>
+              <Text style={styles.infoValue}>{pokemon?.height} M</Text>
             </View>
 
             <View style={styles.infoBox}>
               <Text style={styles.infoLabel}>Peso</Text>
-              <Text style={styles.infoValue}>{pokemon?.weight}</Text>
+              <Text style={styles.infoValue}>{pokemon?.weight} Kg</Text>
             </View>
 
             <View style={styles.infoBox}>
               <Text style={styles.infoLabel}>Experiencia</Text>
-              <Text style={styles.infoValue}>{pokemon?.base_experience}</Text>
+              <Text style={styles.infoValue}>{pokemon?.base_experience} Exp</Text>
             </View>
           </View>
 
@@ -275,6 +275,7 @@ const styles = StyleSheet.create({
   loadingText: {
     color: "#ffcb05",
     fontSize: 15,
+    fontFamily: "Arial",
     fontWeight: "500",
   },
   errorContainer: {
@@ -287,6 +288,7 @@ const styles = StyleSheet.create({
   errorTitle: {
     color: "#ffcb05",
     fontSize: 22,
+    fontFamily: "Arial",
     fontWeight: "bold",
     marginBottom: 8,
     textAlign: "center",
@@ -294,6 +296,7 @@ const styles = StyleSheet.create({
   errorMessage: {
     color: "#fff7d1",
     fontSize: 15,
+    fontFamily: "Arial",
     textAlign: "center",
     marginBottom: 16,
   },
@@ -314,6 +317,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
+    fontFamily: "Arial",
     fontWeight: "bold",
     color: "#ffcb05",
     marginBottom: 14,
@@ -341,12 +345,14 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 22,
+    fontFamily: "Arial",
     fontWeight: "bold",
     color: "#1d3f8f",
     textAlign: "center",
   },
   id: {
     fontSize: 16,
+    fontFamily: "Arial",
     color: "#2a5db0",
     fontWeight: "600",
     marginBottom: 12,
@@ -371,6 +377,7 @@ const styles = StyleSheet.create({
   },
   infoLabel: {
     fontSize: 12,
+    fontFamily: "Arial",
     fontWeight: "600",
     color: "#2a5db0",
     marginBottom: 4,
@@ -378,6 +385,7 @@ const styles = StyleSheet.create({
   },
   infoValue: {
     fontSize: 16,
+    fontFamily: "Arial",
     fontWeight: "bold",
     color: "#1d3f8f",
     textAlign: "center",
@@ -394,6 +402,7 @@ const styles = StyleSheet.create({
   },
   sectionLabel: {
     fontSize: 13,
+    fontFamily: "Arial",
     fontWeight: "bold",
     color: "#2a5db0",
     marginBottom: 4,
@@ -401,6 +410,7 @@ const styles = StyleSheet.create({
   },
   sectionText: {
     fontSize: 15,
+    fontFamily: "Arial",
     color: "#1d3f8f",
     fontWeight: "600",
     textAlign: "center",
@@ -418,6 +428,7 @@ const styles = StyleSheet.create({
   },
   descriptionText: {
     fontSize: 14,
+    fontFamily: "Arial",
     color: "#1d3f8f",
     textAlign: "center",
     lineHeight: 20,
@@ -434,6 +445,7 @@ const styles = StyleSheet.create({
   },
   statsTitle: {
     fontSize: 18,
+    fontFamily: "Arial",
     fontWeight: "bold",
     color: "#1d3f8f",
     textAlign: "center",
@@ -462,11 +474,13 @@ const styles = StyleSheet.create({
   },
   statLabel: {
     fontSize: 13,
+    fontFamily: "Arial",
     fontWeight: "700",
     color: "#2a5db0",
   },
   statValue: {
     fontSize: 14,
+    fontFamily: "Arial",
     fontWeight: "bold",
     color: "#1d3f8f",
   },
@@ -490,6 +504,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#1d3f8f",
     fontSize: 16,
+    fontFamily: "Arial",
     fontWeight: "700",
     textAlign: "center",
   },
